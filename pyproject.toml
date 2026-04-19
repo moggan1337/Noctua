@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "noctua"
+version = "0.1.0"
+description = "Distributed LLM Training System with DataParallel, PipelineParallel, and ZeRO Support"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Noctua Team", email = "team@noctua.ai"}
+]
+keywords = ["deep-learning", "llm", "distributed-training", "pytorch", "transformers"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "torch>=2.1.0",
+    "transformers>=4.36.0",
+    "datasets>=2.15.0",
+    "accelerate>=0.25.0",
+    "tensorboard>=2.15.0",
+    "wandb>=0.16.0",
+    "numpy>=1.24.0",
+    "scipy>=1.11.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.1.0",
+    "mypy>=1.7.0",
+]
+nccl = ["nvidia-nccl-cu12"]
+mpi = ["mpi4py>=4.0.0"]
+flash-attn = ["flash-attn>=2.4.0"]
+all = [
+    "noctua[nccl,mpi,flash-attn,dev]",
+]
+
+[project.urls]
+Homepage = "https://github.com/moggan1337/Noctua"
+Documentation = "https://github.com/moggan1337/Noctua#readme"
+Repository = "https://github.com/moggan1337/Noctua"
+Issues = "https://github.com/moggan1337/Noctua/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ['py310', 'py311', 'py312']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true

@@ -1,0 +1,56 @@
+# ZeRO-2 Configuration for GPT-2 Medium on 8 GPUs
+
+model:
+  model_name: "gpt2-medium"
+  use_flash_attention: true
+  attention_dropout: 0.0
+
+data:
+  dataset_path: "your/dataset"
+  batch_size: 32
+  eval_batch_size: 16
+  max_seq_length: 1024
+  num_workers: 8
+  pin_memory: true
+  use_packing: true
+  packing_ratio: 1.5
+
+training:
+  max_steps: 100000
+  output_dir: "./output/zero2-gpt2-medium"
+  run_name: "zero2-gpt2-medium"
+  precision: "bf16"
+  save_steps: 5000
+  eval_steps: 1000
+  logging_steps: 50
+  warmup_steps: 500
+  gradient_checkpointing: true
+  seed: 42
+
+optimizer:
+  optimizer_type: "adamw"
+  learning_rate: 1.2e-4
+  beta1: 0.9
+  beta2: 0.999
+  epsilon: 1.0e-6
+  weight_decay: 0.1
+  lr_scheduler_type: "cosine"
+  min_lr: 1.2e-5
+  max_grad_norm: 1.0
+
+parallel:
+  strategy: "zero2"
+  world_size: 8
+  rank: 0
+  local_rank: 0
+  backend: "nccl"
+  zero_stage: 2
+  zero_cpu_offload: false
+  gradient_accumulation_steps: 4
+  gradient_clip_norm: 1.0
+  broadcast_buffers: true
+
+use_cuda: true
+use_flash_attention: true
+master_addr: "localhost"
+master_port: 29500
