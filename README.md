@@ -18,6 +18,24 @@
 
 ---
 
+## 🎬 Demo
+![Noctua Demo](demo.gif)
+
+*Distributed LLM training across GPU clusters*
+
+## Screenshots
+| Component | Preview |
+|-----------|---------|
+| Training Dashboard | ![train](screenshots/training.png) |
+| GPU Utilization | ![gpu](screenshots/gpu-util.png) |
+| Gradient Sync | ![gradients](screenshots/gradients.png) |
+
+## Visual Description
+Training dashboard shows loss curves and throughput. GPU utilization displays memory and compute usage per device. Gradient sync shows allreduce operations with bandwidth.
+
+---
+
+
 ## Table of Contents
 
 1. [Overview](#overview)
